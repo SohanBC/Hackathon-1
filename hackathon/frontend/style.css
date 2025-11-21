@@ -1,0 +1,186 @@
+/* GLOBAL */
+body {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  color: #fff;
+  overflow-x: hidden;
+}
+
+.hide {
+  display: none !important;
+}
+
+/* Background animated canvas */
+#bgCanvas {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+}
+
+/* GLASS EFFECT */
+.glass {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+  border-radius: 16px;
+}
+
+/* HEADER */
+.header {
+  width: 100%;
+  padding: 14px 30px;
+  position: fixed;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.logo {
+  font-size: 26px;
+  font-weight: 700;
+}
+.logo .accent {
+  color: #4b72ff;
+}
+
+nav a {
+  margin: 0 10px;
+  color: #c1d4ff;
+  text-decoration: underline;
+  transition: 0.3s;
+}
+nav a:hover {
+  color: white;
+  text-shadow: 0 0 10px #4b72ff;
+}
+
+/* HERO */
+.hero {
+  margin-top: 110px;
+  display: flex;
+  padding: 40px 60px;
+  justify-content: space-between;
+}
+.hero-left h1 {
+  font-size: 42px;
+  font-weight: 900;
+}
+.hero-left p {
+  color: #d4ddff;
+}
+.hero-buttons .btn {
+  margin-right: 12px;
+}
+
+.hero-right .lottie {
+  width: 350px;
+  height: 350px;
+}
+
+/* BUTTON */
+.btn {
+  background: #4b72ff;
+  padding: 12px 22px;
+  border-radius: 12px;
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+  border: none;
+  transition: 0.3s;
+}
+.btn:hover {
+  background: #6e8cff;
+  box-shadow: 0 0 20px #4b72ff;
+}
+
+.btn.ghost {
+  background: transparent;
+  border: 1px solid #4b72ff;
+  color: #4b72ff;
+}
+
+/* INPUT */
+.input {
+  width: 100%;
+  padding: 14px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.1);
+  color: white;
+  border: none;
+  margin: 12px 0;
+}
+
+/* DROP ZONE */
+.drop-zone {
+  border: 2px dashed #4b72ff;
+  padding: 40px;
+  border-radius: 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.drop-zone:hover {
+  background: rgba(75,114,255,0.1);
+}
+.lottie-small {
+  width: 140px;
+  height: 140px;
+  margin: auto;
+}
+
+/* CARD */
+.container {
+  margin: 40px auto;
+  max-width: 900px;
+  position: relative;
+  z-index: 5;
+}
+.card {
+  padding: 30px;
+  margin-bottom: 40px;
+}
+
+/* RESULT BOX */
+.result {
+  margin-top: 10px;
+  padding: 18px;
+  background: rgba(255,255,255,0.07);
+  border-left: 5px solid #4b72ff;
+  border-radius: 10px;
+}
+
+/* DASHBOARD */
+.recent .item {
+  padding: 12px;
+  background: rgba(255,255,255,0.05);
+  margin: 12px 0;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+}
+.recent .item a {
+  color: #90b7ff;
+  text-decoration: underline;
+}
+.recent .item a:hover {
+  color: white;
+}
+
+/* MODAL */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 50;
+}
+.modal-box {
+  padding: 40px;
+  width: 300px;
+  text-align: center;
+}

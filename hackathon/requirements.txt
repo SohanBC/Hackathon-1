@@ -1,0 +1,39 @@
+# --- Backend Framework ---
+fastapi
+uvicorn[standard]
+
+# --- Play Store Scraping ---
+google-play-scraper
+
+# --- APK Analysis ---
+androguard
+pycryptodomex
+
+# --- Image Processing / Hashing ---
+Pillow
+imagehash
+
+# --- Data + Utilities ---
+requests
+python-multipart
+pydantic
+typing_extensions
+
+# --- Background Tasks (optional but included because you have tasks/) ---
+celery
+redis
+
+# --- Database Layer ---
+sqlalchemy
+pymongo
+motor   # async MongoDB driver (if using MongoDB)
+dnspython
+
+# --- Reporting / PDF (if generating evidence kits) ---
+reportlab
+
+# --- Visualization (used by your scripts/generate_viz.py) ---
+matplotlib
+
+# --- Others / Helpers ---
+python-dotenv

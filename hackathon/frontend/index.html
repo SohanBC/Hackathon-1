@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FakeApp Detector — Advanced UI</title>
+
+  <!-- Chart -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Lottie -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.10.1/lottie.min.js"></script>
+
+  <!-- Animation frameworks -->
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles-engine@3/tsparticles.min.js"></script>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <!-- Background -->
+  <canvas id="bgCanvas"></canvas>
+
+  <!-- Header -->
+  <header class="header glass">
+    <div class="logo">FakeApp<span class="accent">Detector</span></div>
+
+    <nav>
+      <a href="#scan">Scan</a>
+      <a href="#upload">Upload APK</a>
+      <a href="#dashboard">Dashboard</a>
+      <a href="#evidence">Evidence Kit</a>
+      <a href="/mnt/data/TECH STACK.pdf" target="_blank">TechStack.pdf</a>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-left">
+      <h1>Detect Fake Apps Instantly</h1>
+      <p>Analyze Play Store URLs or APKs with AI-driven similarity detection.</p>
+
+      <div class="hero-buttons">
+        <a href="#scan" class="btn">Start Scan</a>
+        <a href="#dashboard" class="btn ghost">Dashboard</a>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div id="lottie-hero" class="lottie"></div>
+    </div>
+  </section>
+
+  <!-- Main -->
+  <main class="container">
+
+    <!-- URL Scan -->
+    <section id="scan" class="card glass">
+      <h2>Scan by Play Store URL</h2>
+
+      <input id="urlInput" class="input" placeholder="Paste Play Store URL" />
+      <button onclick="startURLScan()" class="btn">Scan URL</button>
+
+      <div id="urlResult" class="result hide"></div>
+    </section>
+
+    <!-- APK Upload -->
+    <section id="upload" class="card glass">
+      <h2>Upload APK File</h2>
+
+      <div id="dropZone" class="drop-zone">
+        <div id="lottie-upload" class="lottie-small"></div>
+        <p>Drag & drop APK<br>or click to browse</p>
+        <input type="file" id="apkInput" accept=".apk"/>
+      </div>
+
+      <button onclick="triggerUpload()" class="btn">Upload & Scan</button>
+
+      <div id="apkResult" class="result hide"></div>
+    </section>
+
+    <!-- Dashboard -->
+    <section id="dashboard" class="card glass">
+      <h2>Dashboard</h2>
+      <canvas id="riskChart" height="140"></canvas>
+
+      <div id="recentList" class="recent"></div>
+    </section>
+
+    <!-- Evidence -->
+    <section id="evidence" class="card glass">
+      <h2>Evidence Kit Download</h2>
+
+      <input id="scanIdInput" class="input" placeholder="Enter Scan ID" />
+      <button class="btn" onclick="downloadEvidence()">Download Kit</button>
+    </section>
+  </main>
+
+  <!-- Modal -->
+  <div id="modal" class="modal hide">
+    <div class="modal-box glass">
+      <div id="lottie-modal" class="lottie-small"></div>
+      <h3 id="modalTitle">Processing...</h3>
+      <p id="modalText">Please wait...</p>
+      <button onclick="closeModal()" class="btn">Close</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
