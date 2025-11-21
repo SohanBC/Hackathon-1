@@ -1,42 +1,77 @@
-# scripts/generate_viz.py
-import os, json
-from pathlib import Path
+# scripts/generate_histogram.py
+
 import matplotlib.pyplot as plt
+import json
+from pathlib import Path
 
-viz_dir = Path("visuals")
-viz_dir.mkdir(parents=True, exist_ok=True)
 
-# signal importance (weights)
-weights = {"icon_similarity":0.30,"name_package_similarity":0.20,"cert_key_mismatch":0.20,"publisher_history":0.10,"review_patterns":0.20}
-labels = list(weights.keys())
-sizes = [weights[k] for k in labels]
+def generate_histogram(api_response: dict, output_path="histogram.png"):
+    """
+    Generates a histogram image from any API response
+    that contains score → signals → reviews → details → histogram[]
+    """
 
-plt.figure(figsize=(6,6))
-plt.pie(sizes, labels=labels, autopct='%1.1f%%')
-plt.title("Signal importance (normalized)")
-plt.savefig(viz_dir / "signal_importance_pie.png", bbox_inches='tight')
-plt.close()
+    try:
+        histogram = (
+            api_response
+            .get("score", {})
+            .get("signals", {})
+            .get("reviews", {})
+            .get("details", {})
+            .get("histogram", None)
+        )
 
-# coverage counts by source
-coverage_counts = {"play_store":4,"apk":5,"telemetry":1}
-plt.figure(figsize=(6,4))
-plt.bar(list(coverage_counts.keys()), list(coverage_counts.values()))
-plt.title("Signals available per data source")
-plt.ylabel("Signals count")
-plt.savefig(viz_dir / "coverage_bar.png", bbox_inches='tight')
-plt.close()
+        if not histogram or not isinstance(histogram, list):
+            raise ValueError("Histogram data not found in API response")
 
-# pipeline component counts
-pipeline = {"ingest":3,"analysis":6,"scoring":3,"reporting":3}
-plt.figure(figsize=(6,4))
-plt.bar(list(pipeline.keys()), list(pipeline.values()))
-plt.title("Pipeline stages — component counts")
-plt.ylabel("Components")
-plt.savefig(viz_dir / "pipeline_components.png", bbox_inches='tight')
-plt.close()
+        # Draw histogram
+        plt.figure(figsize=(6, 4))
+        plt.bar([1, 2, 3, 4, 5], histogram)
+        plt.title("App Store Review Histogram")
+        plt.xlabel("Rating (1★ to 5★)")
+        plt.ylabel("Count")
+        plt.tight_layout()
 
-summary = {"weights":weights, "coverage":coverage_counts, "pipeline":pipeline}
-with open(viz_dir / "summary.json", "w") as f:
-    json.dump(summary, f, indent=2)
+        # Write file
+        output_path = Path(output_path)
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        plt.savefig(output_path, bbox_inches="tight")
+        plt.close()
 
-print("Visuals saved to", str(viz_dir.resolve()))
+        return {
+            "success": True,
+            "message": "Histogram generated successfully.",
+            "file": str(output_path)
+        }
+
+    except Exception as e:
+        return {
+            "success": False,
+            "error": str(e)
+        }
+
+
+# -------------------------
+# Example (Standalone Test)
+# -------------------------
+if __name__ == "__main__":
+    sample_json = {
+        "package": "com.instagram.android",
+        "score": {
+            "signals": {
+                "reviews": {
+                    "details": {
+                        "histogram": [
+                            16780286,
+                            5587260,
+                            7733214,
+                            14254258,
+                            121065774
+                        ]
+                    }
+                }
+            }
+        }
+    }
+
+    print(generate_histogram(sample_json, "output/instagram_hist.png"))
